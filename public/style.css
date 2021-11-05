@@ -2,20 +2,62 @@
 
 body {
    font-family: "Courier new", monospace;
-
  }
  .innehåll {
    text-transform: uppercase;
    font-weight: bold;
 }
-
-.burgers {
-   background-color: black;
-   color: white;
-
+.headline header{
+  position:absolute;
+  margin-top: -1100px;
+  margin-left: 10px
+}
+.headline img{
+  opacity: 0.5;
+  width: 100%;
+  height:auto;
+}
+.headline{
+  margin:10px 10px 10px 10px;
+  height: 100px;
+  overflow:hidden;
 }
 
+
+.information{
+  margin: 10px 10px 10px 10px;
+border: 2px dashed black;
+ padding-left:10px;
+}
+
+
+button{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.choose{
+  margin:10px;
+}
 button:hover {
   background-color: green;
   cursor: pointer;
+
 }
+.burgers {
+     display: grid;
+     grid-gap: 10px;
+     margin-left: 10px;
+     grid-template-columns: 315px 315px 315px ;
+    background-color: black;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+
+ }
+ .burger {
+   font-size: 150%;
+  border: 2px dashed white;
+   margin-left: 10px;
+   background-color: black;
+ }
