@@ -4,3 +4,18 @@ body {
    font-family: "Courier new", monospace;
 
  }
+ .innehåll {
+   text-transform: uppercase;
+   font-weight: bold;
+}
+
+.burgers {
+   background-color: black;
+   color: white;
+
+}
+
+button:hover {
+  background-color: green;
+  cursor: pointer;
+}
