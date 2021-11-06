@@ -1,7 +1,8 @@
 @import 'https://fonts.googleapis.com/css?family=Pacifico|Dosis';
 
 body {
-   font-family: "Courier new", monospace;
+   font-family: "cambria", serif;
+   font-style: italic;
  }
  .innehåll {
    text-transform: uppercase;
