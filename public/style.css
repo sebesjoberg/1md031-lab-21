@@ -8,10 +8,14 @@ body {
    text-transform: uppercase;
    font-weight: bold;
 }
+
+.burgernames{
+  margin-left: 50px;
+}
 .headline header{
   position:absolute;
   margin-top: -1100px;
-  margin-left: 500px
+  margin-left: 500px;
 }
 .headline img{
   opacity: 0.6;
