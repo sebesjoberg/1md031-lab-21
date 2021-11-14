@@ -11,39 +11,11 @@
     <div>Här väljer du vad du ska beställa</div>
   </section>
   <section class="burgers">
-    <div class="burger 1"> <h5 class="burgernames">The Bro Burger</h5>
-      <img src="https://cdn.shopify.com/s/files/1/0372/9054/1115/products/hampshirehamburgarekopiera_1200x1200.jpg?v=1627649844"
-      title="Bro Burger"  width="400" height="300">
-      <ul>
-        <section class="innehåll"><li>Innehåller gluten</li>
-        </section>
-        <section class="innehåll"><li>Innehåller laktos</li>
-        </section>
-        <section class="innehåll"> <li> OBS! stark</li>
-        </section>
-        </ul>
-      </div>
-      <div class="burger 2"> <h5 class="burgernames">Fullkornsburgaren</h5>
-        <img src="http://skippanudlarna.files.wordpress.com/2012/05/egna-hamburgarestorbild.jpg"
-        title="Fullkornsburgaren" width="400" height="300">
-        <ul>
-          <section class="innehåll">  <li>Innehåller gluten</li>
-          </section>
-          <section class="innehåll"><li>  OBS! nyttig</li>
-          </section>
-        </ul>
-        </div>
-        <div class="burger 3"> <h5 class="burgernames">Klassikern</h5>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa38lJgnL3-bs2NQhc2pOdPsjyQSKoP6CiGA&usqp=CAU"
-          title="Klassikern" width="400" height="300">
-          <ul>
-            <section class="innehåll">  <li>Innehåller gluten</li>
+  <Burger v-for="burger in burgers"
+            v-bind:burger="burger"
+            v-bind:key="burger.name"
+            />
             </section>
-            <section class="innehåll">  <li>Innehåller laktos</li>
-            </section>
-            </ul>
-            </div>
-          </section>
 
 
         <section class="information" >
@@ -91,12 +63,8 @@
         </Footer>
         <div>
 
-          <Burger v-for="burger in burgers"
-          v-bind:burger="burger"
-          v-bind:key="burger.name"
-          v-bind:key2="burger.KCal"/>
-  </div>
 
+  </div>
 
 </template>
 
@@ -107,16 +75,17 @@ const socket = io();
 
 const Items = [
   new MenuItem('The Bro Burger','https://cdn.shopify.com/s/files/1/0372/9054/1115/products/hampshirehamburgarekopiera_1200x1200.jpg?v=1627649844'
-  , 1000, 'true', 'true'),new MenuItem('Fullkornsburgaren','http://skippanudlarna.files.wordpress.com/2012/05/egna-hamburgarestorbild.jpg'
-  , 500, true, false), new MenuItem('Klassikern','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa38lJgnL3-bs2NQhc2pOdPsjyQSKoP6CiGA&usqp=CAU',
-  1500,true,true)
+  , 1000, 'true', 'true', "1"),new MenuItem('Fullkornsburgaren','http://skippanudlarna.files.wordpress.com/2012/05/egna-hamburgarestorbild.jpg'
+  , 500, true, false, "2"), new MenuItem('Klassikern','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa38lJgnL3-bs2NQhc2pOdPsjyQSKoP6CiGA&usqp=CAU',
+  1500,true,true, "3")
 ]
-
-function MenuItem(name, URL, KCal, Gluten, Lactose){
+console.log(Items);
+function MenuItem(name, URL, KCal, Gluten, Lactose, number){
   this.name=name;
   this.URL=URL;
   this.Gluten=Boolean(Gluten);
   this.Lactose=Boolean(Lactose);
+  this.number="burger"+" "+number;
 }
 
 export default {

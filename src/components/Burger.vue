@@ -1,10 +1,8 @@
 <template>
 
   <div>
-
-
   <section class="burgers">
-    <div class="burger 1"> <h5 class="burgernames">{{ burger.name }}</h5>
+    <div v-bind:class="burger.number"> <h5 class="burgernames">{{ burger.name }}</h5>
       <img v-bind:src="burger.URL"
       v-bind:title="burger.name"  width="400" height="300">
       <ul>
@@ -22,6 +20,8 @@
 </template>
 
 <script>
+
+
 export default {
   name: 'Burger',
   props: {
