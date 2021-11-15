@@ -1,5 +1,7 @@
 <template>
 
+
+
   <div>
   <section class="burgers">
 
@@ -8,13 +10,13 @@
       v-bind:title="burger.name"  width="400" height="300">
       <ul>
 
-        <section class="innehåll" v-if="burger.Gluten"><li>Innehåller gluten</li>
+        <section class="innehåll" v-if="burger.gluten"><li>Innehåller gluten</li>
         </section>
 
-        <section class="innehåll" v-if="burger.Lactose"><li>Innehåller laktos</li>
+        <section class="innehåll" v-if="burger.lactose"><li>Innehåller laktos</li>
         </section>
 
-        
+
         </ul>
 
       </div>

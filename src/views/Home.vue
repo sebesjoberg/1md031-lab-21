@@ -1,4 +1,13 @@
 <template>
+<div>
+  <section class="headline">
+    <img src="https://modernalivet.se/wp-content/uploads/2020/10/q-u-i-S6atLH5Rf0U-unsplash.jpg"
+    title="headliner">
+
+    <div><h1>BurgerOnline</h1></div>
+
+  </section>
+  </div>
   <header>
     <h1>Välkommen till BurgerOnline</h1>
 
@@ -15,6 +24,7 @@
             v-bind:burger="burger"
             v-bind:key="burger.name"
             />
+
             </section>
 
 
@@ -70,23 +80,18 @@
 
 <script>
 import Burger from '../components/Burger.vue'
+import menu from '../assets/menu.json'
 import io from 'socket.io-client'
 const socket = io();
 
-const Items = [
-  new MenuItem('The Bro Burger','https://cdn.shopify.com/s/files/1/0372/9054/1115/products/hampshirehamburgarekopiera_1200x1200.jpg?v=1627649844'
-  , 1000, 'true', 'true', "1"),new MenuItem('Fullkornsburgaren','http://skippanudlarna.files.wordpress.com/2012/05/egna-hamburgarestorbild.jpg'
-  , 500, true, false, "2"), new MenuItem('Klassikern','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa38lJgnL3-bs2NQhc2pOdPsjyQSKoP6CiGA&usqp=CAU',
-  1500,true,true, "3")
-]
-console.log(Items);
-function MenuItem(name, URL, KCal, Gluten, Lactose, number){
+/* function MenuItem(name, URL, KCal, Gluten, Lactose, number){
   this.name=name;
   this.URL=URL;
   this.Gluten=Boolean(Gluten);
   this.Lactose=Boolean(Lactose);
   this.number="burger"+" "+number;
-}
+} */
+
 
 export default {
   name: 'Home',
@@ -95,7 +100,7 @@ export default {
   },
   data: function () {
     return {
-      burgers: Items
+      burgers: menu
     }
   },
   methods: {
@@ -131,10 +136,13 @@ export default {
   .burgernames{
     margin-left: 50px;
   }
-  .headline header{
+  .headline div{
     position:absolute;
     margin-top: -1100px;
     margin-left: 500px;
+    font-family: "cambria", serif;
+    font-style: italic;
+
   }
   .headline img{
     opacity: 0.6;
