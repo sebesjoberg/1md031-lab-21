@@ -21,9 +21,9 @@
   </section>
   <section class="burgers">
   <Burger v-for="burger in burgers"
-            v-bind:burger="burger"
-            v-bind:key="burger.name"
-            />
+          v-bind:burger="burger"
+          v-bind:key="burger.name"
+          v-on:orderedBurger="addToOrder($event)"/>
 
             </section>
 
@@ -36,29 +36,33 @@
           <p>
 
               <label for="För och efternamn">För och efternamn</label><br>
-              <input type="text" id="för och efternamn" name="förocheft" required="required" placeholder="För och efternamn">
+              <input v-model="namn" type="text" id="form namn" required="required" placeholder="För och efternamn">
             </p>
+
             <p>
               <label for="E-Mail adress">E-Mail adress</label><br>
-              <input type="email" id="E-Mail" name="E-Mail" required="required" placeholder="E-mail adress">
+              <input v-model="mail" type="email" id="form mail"  required="required" placeholder="E-mail adress">
             </p>
             <p>
               <label for="gata">Gatunamn</label><br>
-                <input type="text" id="Gata" name="Gata" required="required" placeholder="Gatunamn">
+                <input v-model="gata" type="text" id="form gata" required="required" placeholder="Gatunamn">
               </p>
               <p>
                 <label for="Hus nummer">Hus nummer</label><br>
-                <input type="number" id="Hus nummer" name="Hn" required="required" placeholder="Hus nummer">
+                <input v-model="hn" type="number" id="form hus"  required="required" placeholder="Hus nummer">
               </p>
-              <div style=float:left><label for="man">Man</label><br></div>
-              <div ><input type="radio" id="Man" name="Kön"></div>
-              <div style=float:left><label for="Kvinna">Kvinna</label><br></div>
-              <div ><input type="radio" id="Kvinna" name="Kön"></div>
-              <div style=float:left><label for="Icke Binär">Icke Binär</label><br></div>
-              <div ><input type="radio" id="Icke Binär" name="Kön"></div>
-              <div style=float:left><label for="Villej">Vill ej uppge</label><br></div>
-              <div ><input type="radio" id="Villej" name="Kön" checked="checked"></div>
-              <button type="submit">
+
+              <div id="kön">
+              <select v-model="kön" required="required">
+               <option disabled value="">Ange kön</option>
+               <option>Vill ej ange</option>
+                <option>Kvinna</option>
+              <option>Man</option>
+              <option>Icke binär</option>
+              </select>
+</div>
+
+              <button v-on:click="submiter" type="submit">
                 <img src="https://previews.123rf.com/images/sarahdesign/sarahdesign1503/sarahdesign150300752/37543106-ok-button.jpg"
                 height="40">
                 Place Order!
@@ -89,8 +93,10 @@ const socket = io();
   this.URL=URL;
   this.Gluten=Boolean(Gluten);
   this.Lactose=Boolean(Lactose);
-  this.number="burger"+" "+number;
-} */
+  this.number="burger"+" "+number;}
+   */
+
+
 
 
 export default {
@@ -100,10 +106,37 @@ export default {
   },
   data: function () {
     return {
-      burgers: menu
+      burgers: menu,
+      namn: "",
+      mail:"",
+      gata:"",
+      hn:"",
+      kön:"",
+      orderedBurgers:[]
     }
   },
-  methods: {
+   methods: {
+     addToOrder: function (event) {
+
+this.orderedBurgers[event.name] = event.amount;
+
+
+ },
+    submiter: function (){
+     const form = /\S+@\S+\.\S+/;
+      if(this.namn!=""  && this.gata!=""  &&
+      this.hn!=""  && this.kön!="" &&
+      form.test(this.mail)){
+        console.log([this.namn, this.mail, this.gata,
+        this.hn, this.kön, this.orderedBurgers]);
+      this.namn="";
+      this.mail="";
+      this.gata="";
+      this.hn="";
+      this.kön="";}
+
+    },
+
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
     },
@@ -117,7 +150,9 @@ export default {
                               }
                  );
     }
-  }
+
+}
+
 }
 </script>
 
@@ -132,6 +167,7 @@ export default {
      text-transform: uppercase;
      font-weight: bold;
   }
+
 
   .burgernames{
     margin-left: 50px;
@@ -160,6 +196,7 @@ export default {
     margin: 10px 10px 10px 10px;
   border: 2px dashed black;
    padding-left:10px;
+
   }
 
 
