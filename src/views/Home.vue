@@ -69,6 +69,9 @@
               </button>
             </form>
           </section>
+          <div id="wrap">
+          <div id="map" v-on:click="addOrder"></div>
+           </div>
         </main>
 
         <Footer>
@@ -230,19 +233,17 @@ this.orderedBurgers[event.name] = event.amount;
      margin-left: 10px;
      background-color: black;
    }
-   @media screen and (max-width: 800px) {
-      h1 {
-          font-size: 6vw;
-      }
-  }
-
-
-
-
+#wrap{
+  height:500px;
+  width:500px;
+  overflow:scroll;
+}
 
   #map {
-    width: 300px;
-    height: 300px;
-    background-color: red;
+
+    background: url("/img/polacks.jpg");
+     width:1920px;
+        height:1078px;
+
   }
 </style>
