@@ -43,14 +43,8 @@
               <label for="E-Mail adress">E-Mail adress</label><br>
               <input v-model="mail" type="email" id="form mail"  required="required" placeholder="E-mail adress">
             </p>
-            <p>
-              <label for="gata">Gatunamn</label><br>
-                <input v-model="gata" type="text" id="form gata" required="required" placeholder="Gatunamn">
-              </p>
-              <p>
-                <label for="Hus nummer">Hus nummer</label><br>
-                <input v-model="hn" type="number" id="form hus"  required="required" placeholder="Hus nummer">
-              </p>
+
+
 
               <div id="kön">
               <select v-model="kön" required="required">
@@ -61,7 +55,13 @@
               <option>Icke binär</option>
               </select>
 </div>
-
+<label>Ange plats</label>
+<div id="wrap">
+<div id="map" v-on:click="setLocation"></div>
+<div id="loc" v-bind:style="{ left: location.x + 'px',
+            top: location.y + 'px' }">
+            T
+        </div></div>
               <button v-on:click="submiter" type="submit">
                 <img src="https://previews.123rf.com/images/sarahdesign/sarahdesign1503/sarahdesign150300752/37543106-ok-button.jpg"
                 height="40">
@@ -69,9 +69,9 @@
               </button>
             </form>
           </section>
-          <div id="wrap">
-          <div id="map" v-on:click="addOrder"></div>
-           </div>
+
+
+
         </main>
 
         <Footer>
@@ -112,10 +112,11 @@ export default {
       burgers: menu,
       namn: "",
       mail:"",
-      gata:"",
-      hn:"",
       kön:"",
-      orderedBurgers:[]
+      orderedBurgers:[],
+      location:{x:0, y:0},
+
+
     }
   },
    methods: {
@@ -124,35 +125,34 @@ export default {
 this.orderedBurgers[event.name] = event.amount;
 
 
- },
+}, setLocation: function(event){
+const offset=event.target.getBoundingClientRect();
+this.location.x = event.clientX-offset.left-10;
+this.location.y = event.clientY-offset.top-10;
+},
     submiter: function (){
      const form = /\S+@\S+\.\S+/;
-      if(this.namn!=""  && this.gata!=""  &&
-      this.hn!=""  && this.kön!="" &&
+      if(this.namn!=""  && this.kön!="" &&
       form.test(this.mail)){
-        console.log([this.namn, this.mail, this.gata,
-        this.hn, this.kön, this.orderedBurgers]);
+      var orderId=this.getOrderNumber();
+      alert("order was sent! Order number is:"+orderId);
+      socket.emit("addOrder",{ orderId,
+                                details: { x: this.location.x,
+                                           y: this.location.y },
+                                orderItems: ["Beans", "Curry"]
+                              });
       this.namn="";
       this.mail="";
-      this.gata="";
-      this.hn="";
-      this.kön="";}
+      this.kön="";
+      this.location={x:0, y:0};
 
+    }
     },
 
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);
     },
-    addOrder: function (event) {
-      var offset = {x: event.currentTarget.getBoundingClientRect().left,
-                    y: event.currentTarget.getBoundingClientRect().top};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(),
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
-    }
+
 
 }
 
@@ -234,12 +234,25 @@ this.orderedBurgers[event.name] = event.amount;
      background-color: black;
    }
 #wrap{
-  height:500px;
-  width:500px;
+  width:800px;
+     height:500px;
   overflow:scroll;
-}
+ position: relative;;
 
+}
+#loc{
+
+  background-color: black;
+  color: white;
+text-align: center;
+  position: absolute;
+  width:20px;
+  height:20px;
+  border-radius: 10px;
+
+}
   #map {
+
 
     background: url("/img/polacks.jpg");
      width:1920px;
