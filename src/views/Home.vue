@@ -48,13 +48,24 @@
 
               <div id="kön">
               <select v-model="kön" required="required">
-               <option disabled value="">Ange kön</option>
+              <option disabled value="">Ange kön</option>
                <option>Vill ej ange</option>
                 <option>Kvinna</option>
               <option>Man</option>
               <option>Icke binär</option>
               </select>
-</div>
+              </div>
+              <div id="pay">
+              <select v-model="pay" required="required">
+              <option disabled value="">Välj betalmetod</option>
+               <option>Kort</option>
+                <option>Paypal</option>
+              <option>Klarna</option>
+              <option>Swish</option>
+              </select>
+              </div>
+
+
 <label>Ange plats</label>
 <div id="wrap">
 <div id="map" v-on:click="setLocation"></div>
@@ -115,7 +126,7 @@ export default {
       kön:"",
       orderedBurgers:{Bastarden:0, Fullkornsburgaren:0, Klassikern:0},
       location:{x:0, y:0},
-
+      pay:""
 
     }
   },
@@ -134,29 +145,24 @@ this.location.y = event.clientY-offset.top-10;
      const form = /\S+@\S+\.\S+/;
 
       if(this.namn!=""  && this.kön!="" &&
-      form.test(this.mail) && this.ordered()){
+      form.test(this.mail) && this.pay!=""){
       var orderId=this.getOrderNumber();
       alert("order was sent! Order number is:"+orderId);
       socket.emit("addOrder",{ orderId,
                                 details: { x: this.location.x,
                                            y: this.location.y },
-                                orderItems: this.orderedBurgers
+                                orderItems: this.orderedBurgers ,
+                              personalInfo:{ name: this.namn,
+                                email: this.mail,
+                                gender: this.kön,
+                                payment: this.pay}
+
                               });  }
       else{
         alert("Your order was not complete, please fill it out correctly")
       }
     },
-    ordered: function(){
-      if(this.orderedBurgers.Bastarden!=0){
-        return Boolean(true);}
-      if(this.orderedBurgers.Fullkornsburgaren!=0){
-        return Boolean(true);}
-      if(this.orderedBurger.Klassikern!=0){
-        return Boolean(true);}
-      return Boolean(false);
 
-
-    },
 
     getOrderNumber: function () {
       return Math.floor(Math.random()*100000);

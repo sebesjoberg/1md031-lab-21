@@ -3,9 +3,16 @@
     <div id="orderList">
       <div v-for="(order, key) in orders" v-bind:key="'order'+key">
 
-        {{key}}: Bastarden:{{order.orderItems.Bastarden}},
-         Fullkornsburgaren: {{order.orderItems.Fullkornsburgaren}},
-         Klassikern: {{order.orderItems.Klassikern}}.
+
+        Order:{{key}}: Bastarden:{{order.orderItems.Bastarden}},
+         Fullkornsburgaren:{{order.orderItems.Fullkornsburgaren}},
+         Klassikern:{{order.orderItems.Klassikern}}<br>
+         Namn: {{order.personalInfo.name}},
+         E-Mail: {{order.personalInfo.email}}<br>
+         Kön: {{order.personalInfo.gender}},
+         betalmetod: {{order.personalInfo.payment}}
+
+
       </div>
       <button v-on:click="clearQueue">Clear Queue</button>
     </div>
