@@ -113,7 +113,7 @@ export default {
       namn: "",
       mail:"",
       kön:"",
-      orderedBurgers:[],
+      orderedBurgers:{Bastarden:0, Fullkornsburgaren:0, Klassikern:0},
       location:{x:0, y:0},
 
 
@@ -132,21 +132,30 @@ this.location.y = event.clientY-offset.top-10;
 },
     submiter: function (){
      const form = /\S+@\S+\.\S+/;
+
       if(this.namn!=""  && this.kön!="" &&
-      form.test(this.mail)){
+      form.test(this.mail) && this.ordered()){
       var orderId=this.getOrderNumber();
       alert("order was sent! Order number is:"+orderId);
       socket.emit("addOrder",{ orderId,
                                 details: { x: this.location.x,
                                            y: this.location.y },
-                                orderItems: ["Beans", "Curry"]
-                              });
-      this.namn="";
-      this.mail="";
-      this.kön="";
-      this.location={x:0, y:0};
+                                orderItems: this.orderedBurgers
+                              });  }
+      else{
+        alert("Your order was not complete, please fill it out correctly")
+      }
+    },
+    ordered: function(){
+      if(this.orderedBurgers.Bastarden!=0){
+        return Boolean(true);}
+      if(this.orderedBurgers.Fullkornsburgaren!=0){
+        return Boolean(true);}
+      if(this.orderedBurger.Klassikern!=0){
+        return Boolean(true);}
+      return Boolean(false);
 
-    }
+
     },
 
     getOrderNumber: function () {

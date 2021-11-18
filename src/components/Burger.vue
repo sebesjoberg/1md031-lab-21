@@ -51,7 +51,7 @@ methods:{
     this.amountOrdered=0;
   }
 
-  this.$emit('orderedBurger', { name:   this.burger.name,
+  this.$emit('orderedBurger', { name:   this.burger.codename,
                                 amount: this.amountOrdered
                               }
   );
