@@ -124,7 +124,7 @@ export default {
       namn: "",
       mail:"",
       kön:"",
-      orderedBurgers:{Bastarden:0, Fullkornsburgaren:0, Klassikern:0},
+      orderedBurgers:{},
       location:{x:0, y:0},
       pay:""
 
@@ -148,6 +148,7 @@ this.location.y = event.clientY-offset.top-10;
       form.test(this.mail) && this.pay!=""){
       var orderId=this.getOrderNumber();
       alert("order was sent! Order number is:"+orderId);
+      console.log(this.orderedBurgers)
       socket.emit("addOrder",{ orderId,
                                 details: { x: this.location.x,
                                            y: this.location.y },
@@ -252,7 +253,7 @@ this.location.y = event.clientY-offset.top-10;
   width:800px;
      height:500px;
   overflow:scroll;
- position: relative;;
+ position: relative;
 
 }
 #loc{

@@ -3,32 +3,32 @@
 
 
   <div>
-  <section class="burgers">
+    <section class="burgers">
 
-    <div v-bind:class="burger.number"> <h5 class="burgernames">{{ burger.name }}</h5>
-      <img v-bind:src="burger.URL"
-      v-bind:title="burger.name"  width="400" height="300">
-      <ul>
+      <div v-bind:class="burger.number"> <h5 class="burgernames">{{ burger.name }}</h5>
+        <img v-bind:src="burger.URL"
+        v-bind:title="burger.name"  width="400" height="300">
+        <ul>
 
-        <section class="innehåll" v-if="burger.gluten"><li>Innehåller gluten</li>
-        </section>
+          <section class="innehåll" v-if="burger.gluten"><li>Innehåller gluten</li>
+          </section>
 
-        <section class="innehåll" v-if="burger.lactose"><li>Innehåller laktos</li>
-        </section>
-        <section class="innehåll" v-if="burger.nyttig"><li>OBS! nyttig</li>
-        </section>
+          <section class="innehåll" v-if="burger.lactose"><li>Innehåller laktos</li>
+          </section>
+          <section class="innehåll" v-if="burger.nyttig"><li>OBS! nyttig</li>
+          </section>
         </ul>
-       <section class="ordered">Ordered:{{ amountOrdered}}</section>
+        <section class="ordered">Ordered:{{ this.amountOrdered}}</section>
 
-       <button v-on:click="minusBurger" class="minus">
-         -1
-       </button>
-       <button v-on:click="addBurger" class="add">
-         +1
-       </button>
+        <button v-on:click="minusBurger" class="minus">
+          -1
+        </button>
+        <button v-on:click="addBurger" class="add">
+          +1
+        </button>
       </div>
-</section>
-    </div>
+    </section>
+  </div>
 
 </template>
 
@@ -39,34 +39,30 @@ export default {
     burger: Object
   },
   data: function () {
-  return {
-    amountOrdered: 0,
-  }
-},
-methods:{
-  minusBurger: function () {
+    return {
+      amountOrdered: 0,
+    }
+  },
+  methods:{
+    minusBurger: function () {
 
-  this.amountOrdered -= 1;
-  if(this.amountOrdered<0){
-    this.amountOrdered=0;
-  }
+      this.amountOrdered -= 1;
+      if(this.amountOrdered<0){
+        this.amountOrdered=0;
+      }
 
-  this.$emit('orderedBurger', { name:   this.burger.name,
-                                amount: this.amountOrdered
-                              }
-  );
+      this.$emit('orderedBurger', { name:   this.burger.name,
+        amount: this.amountOrdered
+      });
 
-},
-  addBurger: function () {
+    },
+    addBurger: function () {
 
-  this.amountOrdered += 1;
-  this.$emit('orderedBurger', { name:   this.burger.name,
-                                amount: this.amountOrdered
-                              }
-  );
-
-
-}
+      this.amountOrdered += 1;
+      this.$emit('orderedBurger', { name:   this.burger.name,
+        amount: this.amountOrdered
+      }
+    );}
 
 
 }
