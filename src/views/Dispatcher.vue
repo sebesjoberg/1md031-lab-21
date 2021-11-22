@@ -4,9 +4,7 @@
       <div v-for="(order, key) in orders" v-bind:key="'order'+key">
 
 
-        Order:{{key}}: Bastarden:{{order.orderItems.Bastarden}},
-         Fullkornsburgaren:{{order.orderItems.Fullkornsburgaren}},
-         Klassikern:{{order.orderItems.Klassikern}}<br>
+        Order:{{key}}: {{order.orderItems}}<br>
          Namn: {{order.personalInfo.name}},
          E-Mail: {{order.personalInfo.email}}<br>
          Kön: {{order.personalInfo.gender}},
